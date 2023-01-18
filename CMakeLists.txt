@@ -4,6 +4,6 @@ set(CMAKE_CXX_STANDARD 17)
 
 find_package(SFML 2.5 COMPONENTS graphics audio REQUIRED)
 
-add_executable(Linear_Transformation main.cpp)
+add_executable(Linear_Transformation main.cpp Utilities/Pixel.cpp Utilities/Pixel.h Utilities/Coordinate.cpp Utilities/Coordinate.h)
 
 target_link_libraries(Linear_Transformation sfml-graphics sfml-audio)

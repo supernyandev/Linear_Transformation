@@ -1,0 +1,8 @@
+//
+// Created by supernyan on 19.01.23.
+//
+
+#ifndef LINEAR_TRANSFORMATION_PIXEL_H
+#define LINEAR_TRANSFORMATION_PIXEL_H
+
+#endif //LINEAR_TRANSFORMATION_PIXEL_H
