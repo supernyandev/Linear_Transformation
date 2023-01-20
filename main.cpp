@@ -1,7 +1,7 @@
 #include <iostream>
 #include "SFML/Graphics.hpp"
-#include "Utilities/Shapes.h"
-#include "Utilities/Coordinate.h"
+#include "Simulation/Utilities/Shapes.h"
+#include "Simulation/Utilities/Coordinate.h"
 
 const int WINDOW_WIDTH = 500;
 const int WINDOW_HEIGHT = 500;

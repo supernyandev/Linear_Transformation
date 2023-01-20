@@ -10,7 +10,7 @@ public:
     virtual void draw(sf::RenderWindow& window);
 };
 
-struct Coordinate_System{
+class Coordinate_System{
 
 public:
     std::vector<Drawable*> drawables;
@@ -19,4 +19,5 @@ public:
     void add_drawable(Drawable& object);
     Coordinate_System(int WINDOW_WIDTH,int WINDOW_HEIGHT);
 };
+
 #endif
