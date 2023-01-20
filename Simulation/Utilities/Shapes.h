@@ -1,6 +1,13 @@
-#include "Coordinate.h"
-
-
+#pragma once
+#include "SFML/Graphics.hpp"
+#include <vector>
+class Drawable{
+public:
+    static int WINDOW_WIDTH;
+    static int WINDOW_HEIGHT;
+    static void Set_Size(int WINDOW_WIDTH,int WINDOW_HIGHT);
+    virtual void draw(sf::RenderWindow& window);
+};
 class Line : public Drawable {
 
     float length;

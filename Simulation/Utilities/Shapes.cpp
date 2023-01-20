@@ -5,6 +5,12 @@
 #include "Shapes.h"
 #include <iostream>
 
+void Drawable::Set_Size(int WINDOW_WIDTH, int WINDOW_HEIGHT) {
+    Drawable::WINDOW_WIDTH = WINDOW_WIDTH;
+    Drawable::WINDOW_HEIGHT = WINDOW_HEIGHT;
+
+}
+
 int Drawable::WINDOW_WIDTH;
 int Drawable::WINDOW_HEIGHT;
 
@@ -51,11 +57,11 @@ void Pixel::draw(sf::RenderWindow &window) {
 }
 
 void Pixel::set_position(float x, float y) {
-    this->position = sf::Vector2f(x, y);
+    this->position = sf::Vector2f((100.0f - x) / 200.0 * WINDOW_HEIGHT, (100.0f + y) / 200.0 * WINDOW_HEIGHT);
 }
 
 void Pixel::set_position(sf::Vector2f pos) {
-    this->position = pos;
+    this->set_position(pos.x, pos.y);
 }
 
 void Pixel::set_color(sf::Color color) {
@@ -63,7 +69,7 @@ void Pixel::set_color(sf::Color color) {
 }
 
 Pixel::Pixel(sf::Vector2f pos, sf::Color color) {
-    this->position = pos;
+    this->set_position(pos);
     this->color = color;
 }
 
@@ -73,10 +79,10 @@ Pixel::Pixel(float x, float y, sf::Color color) {
 }
 
 Pixel::Pixel(sf::Vector2f pos) {
-    this->position = pos;
+    this->set_position(pos);
     this->color = sf::Color(255, 255, 255);
 }
 
 Pixel::Pixel(float x, float y) {
-    this->position = sf::Vector2f(x, y);
+    this->set_position(x, y);
 }
