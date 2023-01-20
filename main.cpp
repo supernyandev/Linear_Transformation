@@ -1,6 +1,6 @@
 #include <iostream>
 #include "SFML/Graphics.hpp"
-#include "Utilities/Pixel.h"
+#include "Utilities/Shapes.h"
 #include "Utilities/Coordinate.h"
 
 const int WINDOW_WIDTH = 500;
@@ -8,13 +8,25 @@ const int WINDOW_HEIGHT = 500;
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "none");
-    Line ln(WINDOW_WIDTH/2,WINDOW_HEIGHT,WINDOW_WIDTH/2,0);
-    sf::RectangleShape rd(sf::Vector2f(120.5,120.5));
-    while (true){
+    sf::RectangleShape rd(sf::Vector2f(-10.5, -90.5));
+    Drawable::Set_Size(WINDOW_WIDTH,WINDOW_HEIGHT);
+    sf::Event event;
+    Coordinate_System coord(WINDOW_WIDTH,WINDOW_HEIGHT);
+    while (window.isOpen()) {
+        while (window.pollEvent(event)) {
+            switch (event.type) {
+                case sf::Event::Closed:
+                    window.close();
+                    break;
+                default:
+                    break;
+            }
+        }
         window.clear();
-    ln.draw(window);
-    //window.draw(ln.rectangle);
-    //window.draw(rd);
-    window.display();}
+
+        coord.draw_all(window);
+        window.draw(rd);
+        window.display();
+    }
     return 0;
 }
