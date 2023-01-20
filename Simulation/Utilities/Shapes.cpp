@@ -50,14 +50,16 @@ void Line::draw(sf::RenderWindow &window) {
 }
 
 void Pixel::draw(sf::RenderWindow &window) {
-    this->shape.setFillColor(this->color);
-    this->shape.setRadius(this->radius);
-    this->shape.setPosition(this->position);
-    window.draw(shape);
+
+    this->shape->setFillColor(this->color);
+    this->shape->setRadius(this->radius);
+    this->shape->setPosition(this->position);
+    window.draw(*shape);
 }
 
 void Pixel::set_position(float x, float y) {
-    this->position = sf::Vector2f((100.0f - x) / 200.0 * WINDOW_HEIGHT, (100.0f + y) / 200.0 * WINDOW_HEIGHT);
+    this->position = sf::Vector2f((100.0f - x) / 200.0 * WINDOW_WIDTH, (100.0f + y) / 200.0 * WINDOW_HEIGHT);
+    normal_position = sf::Vector2f(x,y);
 }
 
 void Pixel::set_position(sf::Vector2f pos) {
@@ -71,18 +73,14 @@ void Pixel::set_color(sf::Color color) {
 Pixel::Pixel(sf::Vector2f pos, sf::Color color) {
     this->set_position(pos);
     this->color = color;
+    this->shape = new sf::CircleShape(radius) ;
 }
 
 Pixel::Pixel(float x, float y, sf::Color color) {
     this->set_position(x, y);
     this->color = color;
+
+this->shape = new sf::CircleShape(radius) ;
 }
 
-Pixel::Pixel(sf::Vector2f pos) {
-    this->set_position(pos);
-    this->color = sf::Color(255, 255, 255);
-}
 
-Pixel::Pixel(float x, float y) {
-    this->set_position(x, y);
-}

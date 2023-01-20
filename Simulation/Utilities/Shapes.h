@@ -27,8 +27,9 @@ public:
 class Pixel : public Drawable {
 public:
     sf::Vector2f position;
+    sf::Vector2f normal_position;
     sf::Color color;
-    sf::CircleShape shape;
+    sf::CircleShape* shape;
     float radius = 1.5;
 
     void draw(sf::RenderWindow &window);
@@ -39,12 +40,10 @@ public:
 
     void set_color(sf::Color color);
 
-    Pixel(sf::Vector2f pos, sf::Color color);
+    Pixel(sf::Vector2f pos, sf::Color color= sf::Color(255,255,255));
 
-    Pixel(float x, float y, sf::Color color);
+    Pixel(float x, float y, sf::Color color = sf::Color(255,255,255));
 
-    Pixel(sf::Vector2f pos);
 
-    Pixel(float x, float y);
 
 };
