@@ -41,7 +41,7 @@ Line::Line(float x1, float y1, float x2, float y2) {
     this->rectangle.setPosition(this->centre.first, this->centre.second);
     this->rectangle.setRotation(rotation);
     this->rectangle.setFillColor(sf::Color(255, 255, 255));
-    std::cout << this->length << ' ' << this->rectangle.getPosition().y << std::endl;
+    //std::cout << this->length << ' ' << this->rectangle.getPosition().y << std::endl;
 
 }
 
@@ -55,32 +55,59 @@ void Pixel::draw(sf::RenderWindow &window) {
     this->shape->setRadius(this->radius);
     this->shape->setPosition(this->position);
     window.draw(*shape);
+    for(auto it:trace){
+        it->draw(window);
+        if((it->rectangle.getSize()-sf::Vector2f(0,0.01)).y>0){
+        it->rectangle.setSize(it->rectangle.getSize()-sf::Vector2f(0,0.01));}
+
+    }
 }
 
 void Pixel::set_position(float x, float y) {
+
+    auto new_t = new Line(normal_position.x,normal_position.y,x,y);
+    sf::Vector2f vc = new_t->rectangle.getSize();
+    vc.y = 3;
+    new_t->rectangle.setSize(vc);
+    //new_t->rectangle.setFillColor(sf::Color(127+127*sin(0.8*x),127-127*cos(0.8*y),0));
+    trace.push_back(new_t);
     this->position = sf::Vector2f((100.0f - x) / 200.0 * WINDOW_WIDTH, (100.0f + y) / 200.0 * WINDOW_HEIGHT);
-    normal_position = sf::Vector2f(x,y);
+    normal_position = sf::Vector2f(x, y);
+check_trace();
 }
 
 void Pixel::set_position(sf::Vector2f pos) {
+
     this->set_position(pos.x, pos.y);
+    check_trace();
+
 }
 
 void Pixel::set_color(sf::Color color) {
     this->color = color;
+    check_trace();
 }
 
 Pixel::Pixel(sf::Vector2f pos, sf::Color color) {
-    this->set_position(pos);
+    this->position = sf::Vector2f((100.0f - pos.x) / 200.0 * WINDOW_WIDTH, (100.0f + pos.y) / 200.0 * WINDOW_HEIGHT);
+    normal_position = sf::Vector2f(pos.x, pos.y);
     this->color = color;
-    this->shape = new sf::CircleShape(radius) ;
+    this->shape = new sf::CircleShape(radius);
 }
 
 Pixel::Pixel(float x, float y, sf::Color color) {
-    this->set_position(x, y);
+    this->position = sf::Vector2f((100.0f - x) / 200.0 * WINDOW_WIDTH, (100.0f + y) / 200.0 * WINDOW_HEIGHT);
+    normal_position = sf::Vector2f(x, y);
     this->color = color;
 
-this->shape = new sf::CircleShape(radius) ;
+    this->shape = new sf::CircleShape(radius);
+}
+
+void Pixel::check_trace() {
+    while (trace.size() > max_trace_length) {
+        delete *trace.begin();
+        trace.pop_front();
+    }
 }
 
 
