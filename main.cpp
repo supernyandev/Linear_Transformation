@@ -8,7 +8,7 @@ const int WINDOW_WIDTH = 800;
 const int WINDOW_HEIGHT = 800;
 sf::Vector2f func_shrink(sf::Vector2f new_pos,sf::Vector2f start_pos,int frame){
     //std::cout<<new_pos.x<<std::endl;
-    return new_pos*0.9999f;
+    return new_pos*0.9995f;
 }
 sf::Vector2f func_rotate(sf::Vector2f new_pos,sf::Vector2f start_pos,int frame){
     float x_new = 0;
@@ -22,5 +22,5 @@ sf::Vector2f func_rotate(sf::Vector2f new_pos,sf::Vector2f start_pos,int frame){
 int main() {
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "none");
     Drawable::Set_Size(WINDOW_WIDTH,WINDOW_HEIGHT);
-    simulate(WINDOW_WIDTH,WINDOW_HEIGHT,window,func_rotate);
+    simulate(WINDOW_WIDTH,WINDOW_HEIGHT,window,func_shrink);
 }

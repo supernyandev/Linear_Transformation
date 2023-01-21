@@ -69,7 +69,8 @@ void Pixel::set_position(float x, float y) {
     sf::Vector2f vc = new_t->rectangle.getSize();
     vc.y = 3;
     new_t->rectangle.setSize(vc);
-    //new_t->rectangle.setFillColor(sf::Color(127+127*sin(0.8*x),127-127*cos(0.8*y),0));
+    float lngth = sqrt(x*x+y*y);
+    new_t->rectangle.setFillColor(sf::Color(127+127*sin(0.03*lngth),127-127*cos(0.03*lngth),127-sin(0.11*lngth)));
     trace.push_back(new_t);
     this->position = sf::Vector2f((100.0f - x) / 200.0 * WINDOW_WIDTH, (100.0f + y) / 200.0 * WINDOW_HEIGHT);
     normal_position = sf::Vector2f(x, y);
